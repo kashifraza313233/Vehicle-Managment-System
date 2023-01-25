@@ -1,7 +1,8 @@
-﻿using VM.Bussiness.Models;
+﻿using VM.Bussiness.DataServices.Interfaces;
+using VM.Bussiness.Models;
 namespace VM.Bussiness.DataServices
 {
-    public class VehicleInfoService
+    public class VehicleInfoService:IVehicleInformation
     {
         private List<VehicleInfoModel> vehicleInfo= new List<VehicleInfoModel>();
         public List<VehicleInfoModel> GetAll()
