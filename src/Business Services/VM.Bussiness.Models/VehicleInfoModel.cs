@@ -1,13 +1,26 @@
-﻿namespace VM.Bussiness.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace VM.Bussiness.Models
 {
     public class VehicleInfoModel
     {
+
+        [Key]
         public int VId { get; set; }
+        [Required]
         public string? Vehicle { get; set; } = string.Empty;
+        [Required]
         public String? VehicleModel { get; set; } = string.Empty;
+        [Required]
         public String? VehicleNumber { get; set; } = string.Empty;
+        [Required]
         public string? OwnerName { get; set; } = string.Empty;
+        [Required]
         public string? ContactNo { get; set; } = string.Empty;
+        [Required]
+        [DataType(DataType.EmailAddress)]
         public string? EmailAddress { get; set; } = string.Empty;
+        [Required]
+        public string? Service_Type { get; set; } = string.Empty;
     }
 }

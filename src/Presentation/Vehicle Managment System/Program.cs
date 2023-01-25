@@ -1,8 +1,10 @@
+using VM.Bussiness.DataServices;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddSingleton<VehicleInfoService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

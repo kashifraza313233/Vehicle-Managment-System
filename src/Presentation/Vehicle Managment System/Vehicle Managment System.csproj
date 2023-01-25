@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Business Services\VM.Bussiness.DataServices\VM.Bussiness.DataServices.csproj" />
     <ProjectReference Include="..\..\Business Services\VM.Bussiness.Models\VM.Bussiness.Models.csproj" />
   </ItemGroup>
 
