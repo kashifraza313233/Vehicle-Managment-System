@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VM.Bussiness.DataServices;
-using VM.Bussiness.DataServices.Interfaces;
+using VM.Bussiness.Interfaces;
 using VM.Bussiness.Models;
 
 namespace Vehicle_Managment_System.Controllers

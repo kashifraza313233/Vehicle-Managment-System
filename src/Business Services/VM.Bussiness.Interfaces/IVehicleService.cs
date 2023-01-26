@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VM.Bussiness.Models;
+﻿using VM.Bussiness.Models;
 
-namespace VM.Bussiness.DataServices.Interfaces
+namespace VM.Bussiness.Interfaces
 {
     public interface IVehicleService
     {

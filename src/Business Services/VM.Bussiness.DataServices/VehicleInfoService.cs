@@ -1,4 +1,4 @@
-﻿using VM.Bussiness.DataServices.Interfaces;
+﻿using VM.Bussiness.Interfaces;
 using VM.Bussiness.Models;
 namespace VM.Bussiness.DataServices
 {

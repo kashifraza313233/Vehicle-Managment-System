@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using VM.Bussiness.DataServices;
-using VM.Bussiness.DataServices.Interfaces;
+using VM.Bussiness.Interfaces;
 using VM.Data;
 
 var builder = WebApplication.CreateBuilder(args);
