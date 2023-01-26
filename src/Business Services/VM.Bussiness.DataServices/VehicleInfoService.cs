@@ -1,25 +1,56 @@
 ﻿using VM.Bussiness.Interfaces;
 using VM.Bussiness.Models;
+using VM.Data;
+
 namespace VM.Bussiness.DataServices
 {
     public class VehicleInfoService:IVehicleService
     {
-        private List<VehicleInfoModel> vehicleInfo= new List<VehicleInfoModel>();
+        private readonly VehicleManagmentDbContext _dbContext;
+        public VehicleInfoService(VehicleManagmentDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
         public List<VehicleInfoModel> GetAll()
         {
-            //vehicleInfo.Add(new VehicleInfoService {});
-            return vehicleInfo;
+
+            var allVehicleInfo = _dbContext.VehicleInfomations.ToList();
+            var allvehicleinformation = allVehicleInfo.Select(x => new VehicleInfoModel
+            {
+                VId = x.VId,
+                Vehicle = x.Vehicle,
+                VehicleModel = x.VehicleModel,
+                VehicleNumber = x.VehicleNumber,
+                OwnerName = x.OwnerName,
+                ContactNo = x.ContactNo,
+                EmailAddress = x.EmailAddress,
+                Service_Type = x.Service_Type,
+            }).ToList();
+            
+            return allvehicleinformation;
         }
-        public void Add( VehicleInfoModel vehicleInfoModel)
+        public void Add( VehicleInfoModel model)
         {
-            vehicleInfo.Add(vehicleInfoModel);
+            _dbContext.VehicleInfomations.Add(new Data.Models.VehicleInfo
+            {
+                VId = model.VId,
+                Vehicle = model.Vehicle,
+                VehicleModel = model.VehicleModel,
+                VehicleNumber = model.VehicleNumber,
+                OwnerName = model.OwnerName,
+                ContactNo = model.ContactNo,
+                EmailAddress = model.EmailAddress,
+                Service_Type = model.Service_Type,
+            });
+            _dbContext.SaveChanges();
         }
         public void Delete(int id)
         {
-            var deleteVehicleinfo= vehicleInfo.Where(x => x.VId == id).FirstOrDefault();
-            if(deleteVehicleinfo != null)
+            var deleteVehicleinfo= _dbContext.VehicleInfomations.Where(x => x.VId == id).FirstOrDefault();
+            if (deleteVehicleinfo != null)
             {
-                vehicleInfo.Remove(deleteVehicleinfo);
+                _dbContext.VehicleInfomations.Remove(deleteVehicleinfo);
+                _dbContext.SaveChanges();
             }
         }
     }

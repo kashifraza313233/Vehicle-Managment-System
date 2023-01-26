@@ -7,12 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Repositories\VM.Data\VM.Data.csproj" />
     <ProjectReference Include="..\VM.Bussiness.Interfaces\VM.Bussiness.Interfaces.csproj" />
     <ProjectReference Include="..\VM.Bussiness.Models\VM.Bussiness.Models.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Implementation\" />
   </ItemGroup>
 
 </Project>
