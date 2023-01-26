@@ -1,23 +1,24 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VM.Bussiness.DataServices;
+using VM.Bussiness.DataServices.Interfaces;
 using VM.Bussiness.Models;
 
 namespace Vehicle_Managment_System.Controllers
 {
     public class VehicleInformation : Controller
     {
-        private readonly VehicleInfoService _vehicleInfoService;
-        public VehicleInformation(VehicleInfoService vehicleInfoService)
+        private readonly IVehicleService _vehicleService;
+        public VehicleInformation(IVehicleService vehicleService)
         {
-            _vehicleInfoService= vehicleInfoService;
+            _vehicleService= vehicleService;
         }
         // GET: VehicleInform
         public ActionResult Index()
         {
             // var vehicleinfo = new List<VehicleInfoModel>();
 
-            return View(_vehicleInfoService.GetAll());
+            return View(_vehicleService.GetAll());
         }
 
         
@@ -41,7 +42,7 @@ namespace Vehicle_Managment_System.Controllers
         {
             try
             {
-                _vehicleInfoService.Add(vehicleInfoModel);
+                _vehicleService.Add(vehicleInfoModel);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -53,7 +54,7 @@ namespace Vehicle_Managment_System.Controllers
         // GET: VehicleInform/Edit/5
         public ActionResult Edit(int id)
         {
-            var VehicleInformation = _vehicleInfoService.GetAll().Where(x => x.VId == id).FirstOrDefault();
+            var VehicleInformation = _vehicleService.GetAll().Where(x => x.VId == id).FirstOrDefault();
             return View(VehicleInformation);
         }
 
@@ -64,7 +65,7 @@ namespace Vehicle_Managment_System.Controllers
         {
             try
             {
-                var VehicleInformation = _vehicleInfoService.GetAll().Where(x => x.VId == vi.VId).FirstOrDefault();
+                var VehicleInformation = _vehicleService.GetAll().Where(x => x.VId == vi.VId).FirstOrDefault();
                 if(VehicleInformation!= null)
                 {
                     VehicleInformation.Vehicle=vi.Vehicle;
@@ -85,7 +86,7 @@ namespace Vehicle_Managment_System.Controllers
         // GET: VehicleInform/Delete/5
         public ActionResult Delete(int id)
         {
-            _vehicleInfoService.Delete(id);
+            _vehicleService.Delete(id);
             return RedirectToAction(nameof(Index));
         }
 

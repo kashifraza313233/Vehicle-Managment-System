@@ -7,7 +7,7 @@ using VM.Bussiness.Models;
 
 namespace VM.Bussiness.DataServices.Interfaces
 {
-    public interface IVehicleInformation
+    public interface IVehicleService
     {
         public List<VehicleInfoModel> GetAll();
         public void Add(VehicleInfoModel vehicleInfoModel);

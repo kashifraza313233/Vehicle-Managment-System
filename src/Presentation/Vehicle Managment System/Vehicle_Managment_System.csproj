@@ -8,12 +8,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.11" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Business Services\VM.Bussiness.DataServices\VM.Bussiness.DataServices.csproj" />
     <ProjectReference Include="..\..\Business Services\VM.Bussiness.Models\VM.Bussiness.Models.csproj" />
+    <ProjectReference Include="..\..\Repositories\VM.Data\VM.Data.csproj" />
   </ItemGroup>
 
 </Project>

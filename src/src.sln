@@ -11,15 +11,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repositories", "Repositories", "{373071AF-B608-4940-A6C0-B3B048E8FAB3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VM.Data", "Repositories\VM.Data\VM.Data.csproj", "{3633877A-C429-4DB4-86DF-FA5079679835}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VM.Data", "Repositories\VM.Data\VM.Data.csproj", "{3633877A-C429-4DB4-86DF-FA5079679835}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VM.Data.Models", "VM.Data.Models\VM.Data.Models.csproj", "{C485D1FD-62A7-4D17-9961-71915A31AC97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VM.Data.Models", "VM.Data.Models\VM.Data.Models.csproj", "{C485D1FD-62A7-4D17-9961-71915A31AC97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vehicle Managment System", "Presentation\Vehicle Managment System\Vehicle Managment System.csproj", "{7043EF32-5112-4B06-8DCC-A568B3294982}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vehicle_Managment_System", "Presentation\Vehicle Managment System\Vehicle_Managment_System.csproj", "{7043EF32-5112-4B06-8DCC-A568B3294982}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VM.Bussiness.Models", "Business Services\VM.Bussiness.Models\VM.Bussiness.Models.csproj", "{5B42EDD3-4717-4302-93A1-2CCBB6A6DA79}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VM.Bussiness.Models", "Business Services\VM.Bussiness.Models\VM.Bussiness.Models.csproj", "{5B42EDD3-4717-4302-93A1-2CCBB6A6DA79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VM.Bussiness.DataServices", "Business Services\VM.Bussiness.DataServices\VM.Bussiness.DataServices.csproj", "{F5428F9D-B474-45C5-BE4C-0E96933658E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VM.Bussiness.DataServices", "Business Services\VM.Bussiness.DataServices\VM.Bussiness.DataServices.csproj", "{F5428F9D-B474-45C5-BE4C-0E96933658E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
