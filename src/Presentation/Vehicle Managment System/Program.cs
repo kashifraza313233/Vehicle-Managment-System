@@ -11,7 +11,7 @@ options => options.UseSqlServer("Data Source=DESKTOP-EOP4ESH\\SQLEXPRESS01;Datab
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 //Custom Configuration
-builder.Services.AddSingleton<IVehicleService,VehicleInfoService>();
+builder.Services.AddScoped<IVehicleService,VehicleInfoService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
