@@ -65,16 +65,7 @@ namespace Vehicle_Managment_System.Controllers
         {
             try
             {
-                var VehicleInformation = _vehicleService.GetAll().Where(x => x.VId == vi.VId).FirstOrDefault();
-                if(VehicleInformation!= null)
-                {
-                    VehicleInformation.Vehicle=vi.Vehicle;
-                    VehicleInformation.Vehicle=vi.VehicleModel;
-                    VehicleInformation.Vehicle=vi.VehicleNumber;
-                    VehicleInformation.Vehicle=vi.OwnerName;
-                    VehicleInformation.Vehicle=vi.ContactNo;
-                    VehicleInformation.Vehicle=vi.EmailAddress;
-                }
+                _vehicleService.Update(vi);
                 return RedirectToAction(nameof(Index));
             }
             catch

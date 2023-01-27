@@ -44,6 +44,21 @@ namespace VM.Bussiness.DataServices
             });
             _dbContext.SaveChanges();
         }
+        public void Update(VehicleInfoModel vehicleInfoModel)
+        {
+            var updateVehicleinfo = _dbContext.VehicleInfomations.FirstOrDefault(x=>x.VId==vehicleInfoModel.VId);
+            if(updateVehicleinfo != null)
+            {
+                updateVehicleinfo.Vehicle = vehicleInfoModel.Vehicle;
+                updateVehicleinfo.VehicleModel = vehicleInfoModel.VehicleModel;
+                updateVehicleinfo.VehicleNumber = vehicleInfoModel.VehicleNumber;
+                updateVehicleinfo.OwnerName= vehicleInfoModel.OwnerName;
+                updateVehicleinfo.ContactNo= vehicleInfoModel.ContactNo;
+                updateVehicleinfo.EmailAddress= vehicleInfoModel.EmailAddress;
+                //updateVehicleinfo.Service_Type= vehicleInfoModel.Service_Type;
+                _dbContext.SaveChanges();
+            }
+        }
         public void Delete(int id)
         {
             var deleteVehicleinfo= _dbContext.VehicleInfomations.Where(x => x.VId == id).FirstOrDefault();

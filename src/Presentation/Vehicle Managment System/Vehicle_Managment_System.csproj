@@ -22,6 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Business Services\VM.Bussiness.DataServices\VM.Bussiness.DataServices.csproj" />
     <ProjectReference Include="..\..\Business Services\VM.Bussiness.Models\VM.Bussiness.Models.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\VM.DependeciesInjection\VM.DependeciesInjection.csproj" />
     <ProjectReference Include="..\..\Repositories\VM.Data\VM.Data.csproj" />
   </ItemGroup>
 
