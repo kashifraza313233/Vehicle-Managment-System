@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VM.Data;
 
@@ -10,9 +11,11 @@ using VM.Data;
 namespace VM.Data.Migrations
 {
     [DbContext(typeof(VehicleManagmentDbContext))]
-    partial class VehicleManagmentDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230130143630_services")]
+    partial class services
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

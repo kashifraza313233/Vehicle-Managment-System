@@ -24,7 +24,7 @@ namespace VM.Bussiness.DataServices
                 OwnerName = x.OwnerName,
                 ContactNo = x.ContactNo,
                 EmailAddress = x.EmailAddress,
-                Service_Type = x.Service_Type,
+            
             }).ToList();
             
             return allvehicleinformation;
@@ -40,7 +40,7 @@ namespace VM.Bussiness.DataServices
                 OwnerName = model.OwnerName,
                 ContactNo = model.ContactNo,
                 EmailAddress = model.EmailAddress,
-                Service_Type = model.Service_Type,
+             
             });
             _dbContext.SaveChanges();
         }
@@ -55,7 +55,7 @@ namespace VM.Bussiness.DataServices
                 updateVehicleinfo.OwnerName= vehicleInfoModel.OwnerName;
                 updateVehicleinfo.ContactNo= vehicleInfoModel.ContactNo;
                 updateVehicleinfo.EmailAddress= vehicleInfoModel.EmailAddress;
-                //updateVehicleinfo.Service_Type= vehicleInfoModel.Service_Type;
+                
                 _dbContext.SaveChanges();
             }
         }

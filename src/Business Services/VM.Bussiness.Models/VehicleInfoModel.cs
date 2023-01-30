@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VM.Bussiness.Models
 {
@@ -20,7 +21,11 @@ namespace VM.Bussiness.Models
         [Required]
         [DataType(DataType.EmailAddress)]
         public string? EmailAddress { get; set; } = string.Empty;
-        [Required]
-        public string? Service_Type { get; set; } = string.Empty;
+        [Display(Name = "Services")]
+        public virtual int ServicesId { get; set; }
+
+        [ForeignKey("ServicesId")]
+        public virtual Services? Services { get; set; }
+
     }
 }
