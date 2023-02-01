@@ -21,23 +21,6 @@ namespace VM.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("VM.Data.Models.Services", b =>
-                {
-                    b.Property<int>("ServicesId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ServicesId"));
-
-                    b.Property<string>("ServicesType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ServicesId");
-
-                    b.ToTable("Services");
-                });
-
             modelBuilder.Entity("VM.Data.Models.VehicleInfo", b =>
                 {
                     b.Property<int>("VId")
@@ -58,8 +41,9 @@ namespace VM.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ServicesId")
-                        .HasColumnType("int");
+                    b.Property<string>("Service_Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Vehicle")
                         .IsRequired()
@@ -75,20 +59,7 @@ namespace VM.Data.Migrations
 
                     b.HasKey("VId");
 
-                    b.HasIndex("ServicesId");
-
                     b.ToTable("VehicleInfomations");
-                });
-
-            modelBuilder.Entity("VM.Data.Models.VehicleInfo", b =>
-                {
-                    b.HasOne("VM.Data.Models.Services", "Services")
-                        .WithMany()
-                        .HasForeignKey("ServicesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Services");
                 });
 #pragma warning restore 612, 618
         }

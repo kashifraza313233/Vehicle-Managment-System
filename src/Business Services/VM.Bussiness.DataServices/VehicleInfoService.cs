@@ -24,7 +24,7 @@ namespace VM.Bussiness.DataServices
                 OwnerName = x.OwnerName,
                 ContactNo = x.ContactNo,
                 EmailAddress = x.EmailAddress,
-            
+                Service_Type = x.Service_Type,
             }).ToList();
             
             return allvehicleinformation;
@@ -40,24 +40,9 @@ namespace VM.Bussiness.DataServices
                 OwnerName = model.OwnerName,
                 ContactNo = model.ContactNo,
                 EmailAddress = model.EmailAddress,
-             
+                Service_Type = model.Service_Type,
             });
             _dbContext.SaveChanges();
-        }
-        public void Update(VehicleInfoModel vehicleInfoModel)
-        {
-            var updateVehicleinfo = _dbContext.VehicleInfomations.FirstOrDefault(x=>x.VId==vehicleInfoModel.VId);
-            if(updateVehicleinfo != null)
-            {
-                updateVehicleinfo.Vehicle = vehicleInfoModel.Vehicle;
-                updateVehicleinfo.VehicleModel = vehicleInfoModel.VehicleModel;
-                updateVehicleinfo.VehicleNumber = vehicleInfoModel.VehicleNumber;
-                updateVehicleinfo.OwnerName= vehicleInfoModel.OwnerName;
-                updateVehicleinfo.ContactNo= vehicleInfoModel.ContactNo;
-                updateVehicleinfo.EmailAddress= vehicleInfoModel.EmailAddress;
-                
-                _dbContext.SaveChanges();
-            }
         }
         public void Delete(int id)
         {

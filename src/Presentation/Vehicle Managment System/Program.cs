@@ -1,18 +1,17 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using VM.Bussiness.DataServices;
 using VM.Bussiness.Interfaces;
 using VM.Data;
-using VM.DependeciesInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container
+// Entity Framework Configuration
+builder.Services.AddDbContext<VehicleManagmentDbContext>(
+options => options.UseSqlServer("Data Source=DESKTOP-EOP4ESH\\SQLEXPRESS01;Database=VehicleManagmentSystem; Integrated Security=SSPI;TrustServerCertificate=True;"));
+// Add services to the container.
 builder.Services.AddControllersWithViews();
-
-// Application Dependency Injection Configuration
-builder.Services.AppDISetup(builder.Configuration);
-
+//Custom Configuration
+builder.Services.AddScoped<IVehicleService,VehicleInfoService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
