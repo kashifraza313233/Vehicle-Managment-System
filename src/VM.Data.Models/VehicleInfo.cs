@@ -2,10 +2,9 @@
 
 namespace VM.Data.Models
 {
-    public class VehicleInfo
+    public class VehicleInfo : BaseEntity
     {
-        [Key]
-        public int VId { get; set; }
+        
         [Required]
         public string? Vehicle { get; set; } = string.Empty;
         [Required]
