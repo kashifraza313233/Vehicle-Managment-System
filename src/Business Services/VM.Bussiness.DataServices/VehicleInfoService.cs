@@ -61,7 +61,7 @@ namespace VM.Bussiness.DataServices
         }
         public void Delete(int id)
         {
-            var deleteVehicleinfo= _dbContext.Get(x=>x.VId==id).FirstOrDefault();
+            var deleteVehicleinfo = _dbContext.Get(x=>x.VId==id).FirstOrDefault();
             if (deleteVehicleinfo != null)
             {
                 _dbContext.Delete(deleteVehicleinfo);

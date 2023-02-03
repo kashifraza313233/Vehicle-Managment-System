@@ -48,8 +48,8 @@ namespace VM.Data
                 _context.Entry(entity).State = EntityState.Modified;
                 _context.SaveChanges();
            }else
-            {
-                _dbset.Attach(entity);
+            { 
+                _dbset.Add(entity);
                 _context.SaveChanges();
             }
         }
