@@ -33,12 +33,13 @@ namespace VM.Data
             if (dbentity.State!=EntityState.Deleted)
             {
                 dbentity.State = EntityState.Deleted;
-            }else
+            }
+            else
             {
                 _dbset.Attach(entity);
                 _dbset.Remove(entity);
-                _context.SaveChanges();
             }
+            _context.SaveChanges();
         }
         public void Save(TEntity entity)
         {
@@ -46,12 +47,13 @@ namespace VM.Data
            {
               _dbset.Attach(entity);
                 _context.Entry(entity).State = EntityState.Modified;
-                _context.SaveChanges();
+             
            }else
             { 
                 _dbset.Add(entity);
-                _context.SaveChanges();
+               
             }
+            _context.SaveChanges();
         }
     }
 }

@@ -8,15 +8,15 @@ namespace VM.Bussiness.DataServices
 {
     public class VehicleInfoService:IVehicleService
     {
-        private readonly IRepository<VehicleInfo> _dbContext;
-        public VehicleInfoService(IRepository<VehicleInfo> dbContext)
+        private readonly IRepository<VehicleInfo>  _repository;
+        public VehicleInfoService(IRepository<VehicleInfo> repository)
         {
-            _dbContext = dbContext;
+            _repository = repository;
         }
         public List<VehicleInfoModel> GetAll()
         {
 
-            var allVehicleInfo = _dbContext.GetAll();
+            var allVehicleInfo = _repository.GetAll();
             var allvehicleinformation = allVehicleInfo.Select(x => new VehicleInfoModel
             {
                 VId = x.VId,
@@ -33,7 +33,7 @@ namespace VM.Bussiness.DataServices
         }
         public void Add( VehicleInfoModel model)
         {
-            _dbContext.Save(new Data.Models.VehicleInfo
+            _repository.Save(new Data.Models.VehicleInfo
             {
                 VId = model.VId,
                 Vehicle = model.Vehicle,
@@ -48,7 +48,7 @@ namespace VM.Bussiness.DataServices
         }
         public void Update(VehicleInfoModel model)
         {
-            _dbContext.Save(new VehicleInfo {
+            _repository.Save(new VehicleInfo {
                 VId = model.VId,
                 Vehicle = model.Vehicle,
                 VehicleModel = model.VehicleModel,
@@ -61,12 +61,16 @@ namespace VM.Bussiness.DataServices
         }
         public void Delete(int id)
         {
-            var deleteVehicleinfo = _dbContext.Get(x=>x.VId==id).FirstOrDefault();
+            var deleteVehicleinfo = _repository.Get(x=>x.VId==id).FirstOrDefault();
             if (deleteVehicleinfo != null)
             {
-                _dbContext.Delete(deleteVehicleinfo);
+                _repository.Delete(deleteVehicleinfo);
                 
+                /*_dbContext.SaveChanges();*/
+
             }
         }
+
+       
     }
 }

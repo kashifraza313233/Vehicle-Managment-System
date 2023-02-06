@@ -16,7 +16,7 @@ namespace Vehicle_Managment_System.Controllers
         // GET: VehicleInform
         public ActionResult Index()
         {
-            // var vehicleinfo = new List<VehicleInfoModel>();
+            //var vehicleinfo = new List<VehicleInfoModel>();
 
             return View(_vehicleService.GetAll());
         }

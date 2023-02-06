@@ -20,6 +20,8 @@ namespace VM.DependencyInjection
             services.AddScoped(typeof(IRepository<>),typeof(Repository<>));
             //Custom Configuration
            services.AddScoped<IVehicleService, VehicleInfoService>();
+            //AutoMapper Configuration
+            services.AddAutoMapper(typeof(BusinessEntityMapping));
         }
     }
 }
