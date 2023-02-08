@@ -10,5 +10,7 @@ namespace VM.Data
 
         }
         public DbSet<VehicleInfo> VehicleInfomations { get; set; }
+      
+       
     }
 }

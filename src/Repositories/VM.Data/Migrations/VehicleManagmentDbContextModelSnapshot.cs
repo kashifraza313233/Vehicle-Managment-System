@@ -21,6 +21,31 @@ namespace VM.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("VM.Data.Models.Services", b =>
+                {
+                    b.Property<int>("SId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SId"));
+
+                    b.Property<string>("CoverImage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Discription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ServicesName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SId");
+
+                    b.ToTable("services");
+                });
+
             modelBuilder.Entity("VM.Data.Models.VehicleInfo", b =>
                 {
                     b.Property<int>("VId")

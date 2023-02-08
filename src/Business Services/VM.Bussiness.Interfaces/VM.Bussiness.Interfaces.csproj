@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Repositories\VM.Data\VM.Data.csproj" />
     <ProjectReference Include="..\VM.Bussiness.Models\VM.Bussiness.Models.csproj" />
   </ItemGroup>
 
