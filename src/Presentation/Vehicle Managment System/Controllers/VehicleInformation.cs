@@ -14,11 +14,21 @@ namespace Vehicle_Managment_System.Controllers
             _vehicleService= vehicleService;
         }
         // GET: VehicleInform
-        public ActionResult Index()
+        public ActionResult Index(string? searchinfo)
         {
+            List<VehicleInfoModel> vehicleInfo;
+            if (searchinfo == null)
+            {
+                vehicleInfo= _vehicleService.GetAll();
+            }
+            else
+            {
+                vehicleInfo = _vehicleService.Search(searchinfo);
+            }
             //var vehicleinfo = new List<VehicleInfoModel>();
 
-            return View(_vehicleService.GetAll());
+            //return View(_vehicleService.GetAll());
+            return View(vehicleInfo);
         }
 
         

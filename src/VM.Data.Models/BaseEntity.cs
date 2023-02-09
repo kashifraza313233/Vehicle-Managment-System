@@ -6,5 +6,6 @@ namespace VM.Data.Models
     {
         [Key]
         public int VId { get; set; }
+      
     }
 }
