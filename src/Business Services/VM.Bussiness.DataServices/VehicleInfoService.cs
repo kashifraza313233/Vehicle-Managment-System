@@ -15,24 +15,24 @@ namespace VM.Bussiness.DataServices
         {
             _repository = repository;
         }
-        public List<VehicleInfoModel> GetAll()
-        {
+        //public List<VehicleInfoModel> GetAll()
+        //{
 
-            var allVehicleInfo = _repository.GetAll();
-            var allvehicleinformation = allVehicleInfo.Select(x => new VehicleInfoModel
-            {
-                VId = x.VId,
-                Vehicle = x.Vehicle,
-                VehicleModel = x.VehicleModel,
-                VehicleNumber = x.VehicleNumber,
-                OwnerName = x.OwnerName,
-                ContactNo = x.ContactNo,
-                EmailAddress = x.EmailAddress,
-                Service_Type = x.Service_Type,
-            }).ToList();
+        //    var allVehicleInfo = _repository.GetAll();
+        //    var allvehicleinformation = allVehicleInfo.Select(x => new VehicleInfoModel
+        //    {
+        //        VId = x.VId,
+        //        Vehicle = x.Vehicle,
+        //        VehicleModel = x.VehicleModel,
+        //        VehicleNumber = x.VehicleNumber,
+        //        OwnerName = x.OwnerName,
+        //        ContactNo = x.ContactNo,
+        //        EmailAddress = x.EmailAddress,
+        //        Service_Type = x.Service_Type,
+        //    }).ToList();
 
-            return allvehicleinformation;
-        }
+        //    return allvehicleinformation;
+        //}
         public List<VehicleInfoModel> Search(string Searchinfo)
         {
             Searchinfo = Searchinfo.Trim().ToLower();
@@ -51,46 +51,46 @@ namespace VM.Bussiness.DataServices
             }).ToList();
             return infomation;
         }
-        public void Add(VehicleInfoModel model)
-        {
-            _repository.Save(new Data.Models.VehicleInfo
-            {
-                VId = model.VId,
-                Vehicle = model.Vehicle,
-                VehicleModel = model.VehicleModel,
-                VehicleNumber = model.VehicleNumber,
-                OwnerName = model.OwnerName,
-                ContactNo = model.ContactNo,
-                EmailAddress = model.EmailAddress,
-                Service_Type = model.Service_Type,
-            });
-            /// _dbContext.SaveChanges();
-        }
-        public void Update(VehicleInfoModel model)
-        {
-            _repository.Save(new VehicleInfo
-            {
-                VId = model.VId,
-                Vehicle = model.Vehicle,
-                VehicleModel = model.VehicleModel,
-                VehicleNumber = model.VehicleNumber,
-                OwnerName = model.OwnerName,
-                ContactNo = model.ContactNo,
-                EmailAddress = model.EmailAddress,
-                Service_Type = model.Service_Type,
-            });
-        }
-        public void Delete(int id)
-        {
-            var deleteVehicleinfo = _repository.Get(x => x.VId == id).FirstOrDefault();
-            if (deleteVehicleinfo != null)
-            {
-                _repository.Delete(deleteVehicleinfo);
+        //public void Add(VehicleInfoModel model)
+        //{
+        //    _repository.Save(new Data.Models.VehicleInfo
+        //    {
+        //        VId = model.VId,
+        //        Vehicle = model.Vehicle,
+        //        VehicleModel = model.VehicleModel,
+        //        VehicleNumber = model.VehicleNumber,
+        //        OwnerName = model.OwnerName,
+        //        ContactNo = model.ContactNo,
+        //        EmailAddress = model.EmailAddress,
+        //        Service_Type = model.Service_Type,
+        //    });
+        //    /// _dbContext.SaveChanges();
+        //}
+        //public void Update(VehicleInfoModel model)
+        //{
+        //    _repository.Save(new VehicleInfo
+        //    {
+        //        VId = model.VId,
+        //        Vehicle = model.Vehicle,
+        //        VehicleModel = model.VehicleModel,
+        //        VehicleNumber = model.VehicleNumber,
+        //        OwnerName = model.OwnerName,
+        //        ContactNo = model.ContactNo,
+        //        EmailAddress = model.EmailAddress,
+        //        Service_Type = model.Service_Type,
+        //    });
+        //}
+        //public void Delete(int id)
+        //{
+        //    var deleteVehicleinfo = _repository.Get(x => x.VId == id).FirstOrDefault();
+        //    if (deleteVehicleinfo != null)
+        //    {
+        //        _repository.Delete(deleteVehicleinfo);
 
-                /*_dbContext.SaveChanges();*/
+        //        /*_dbContext.SaveChanges();*/
 
-            }
-        }
+        //    }
+        //}
 
 
     }
