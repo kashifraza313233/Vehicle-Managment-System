@@ -5,22 +5,18 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace VM.Bussiness.Models
 {
-    public class ServicesModel
+    public class AddServicesModel
     {
-        [Key]
-        public int SId { get; set; }
         [Required]
-        [Display(Name ="Choose Image")]
+        [Display(Name = "Choose Image")]
         public IFormFile Coverimage { get; set; }
         [Required]
         public string ServiceName { get; set; } = string.Empty;
         [Required]
         public string Description { get; set; } = string.Empty;
-        
-
-
     }
 }

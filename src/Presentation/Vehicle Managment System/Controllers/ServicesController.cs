@@ -9,7 +9,13 @@ namespace Vehicle_Managment_System.Controllers
 {
     public class ServicesController : Controller
     {
-        
+        VehicleManagmentDbContext dbContext;
+        IWebHostEnvironment environment;
+        public ServicesController(VehicleManagmentDbContext _dbContext, IWebHostEnvironment _environment)
+        {
+            dbContext = _dbContext;
+            environment = _environment;
+        }
         // GET: ServicesController
         public ActionResult Index()
         {
@@ -31,9 +37,25 @@ namespace Vehicle_Managment_System.Controllers
         // POST: ServicesController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ServicesModel models)
+        public ActionResult Create(AddServicesModel model )
         {
-            
+            if (ModelState.IsValid)
+            {
+                string ImageName = model.Coverimage.FileName.ToString();
+                var Folderpath = Path.Combine(environment.WebRootPath, "images");
+                var imagespath = Path.Combine(Folderpath, ImageName);
+                model.Coverimage.CopyTo(new FileStream(imagespath, FileMode.Create));
+
+                Services services = new Services();
+
+                services.CoverImage = ImageName;
+                services.ServiceName = model.ServiceName;
+                services.Description = model.Description;
+                dbContext.Services.Add(services);
+                dbContext.SaveChanges();
+                return RedirectToAction("Create", "Services");
+            }
+
             return View();
         }
 
