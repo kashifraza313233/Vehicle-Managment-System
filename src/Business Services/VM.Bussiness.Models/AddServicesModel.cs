@@ -11,6 +11,8 @@ namespace VM.Bussiness.Models
 {
     public class AddServicesModel
     {
+        [Key]
+        public int SId { get; set; }
         [Required]
         [Display(Name = "Choose Image")]
         public IFormFile Coverimage { get; set; }

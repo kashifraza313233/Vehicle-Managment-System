@@ -19,7 +19,9 @@ namespace Vehicle_Managment_System.Controllers
         // GET: ServicesController
         public ActionResult Index()
         {
-            return View();
+            var AllServices = dbContext.Services;
+           
+            return View(AllServices);
         }
 
         // GET: ServicesController/Details/5
@@ -53,7 +55,7 @@ namespace Vehicle_Managment_System.Controllers
                 services.Description = model.Description;
                 dbContext.Services.Add(services);
                 dbContext.SaveChanges();
-                return RedirectToAction("Create", "Services");
+                return RedirectToAction("Index", "Services");
             }
 
             return View();
