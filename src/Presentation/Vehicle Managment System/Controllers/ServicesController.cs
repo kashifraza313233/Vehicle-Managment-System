@@ -47,15 +47,13 @@ namespace Vehicle_Managment_System.Controllers
                 var Folderpath = Path.Combine(environment.WebRootPath, "images");
                 var imagespath = Path.Combine(Folderpath, ImageName);
                 model.Coverimage.CopyTo(new FileStream(imagespath, FileMode.Create));
-
                 Services services = new Services();
-
                 services.CoverImage = ImageName;
                 services.ServiceName = model.ServiceName;
                 services.Description = model.Description;
                 dbContext.Services.Add(services);
                 dbContext.SaveChanges();
-                return RedirectToAction("Index", "Services");
+                return RedirectToAction("Create", "Services");
             }
 
             return View();
