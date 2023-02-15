@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using VM.Bussiness.DataServices;
+
 using VM.Bussiness.Models;
 using VM.Data;
 using VM.Data.Models;
@@ -9,8 +9,8 @@ namespace Vehicle_Managment_System.Controllers
 {
     public class ServicesController : Controller
     {
-        VehicleManagmentDbContext dbContext;
-        IWebHostEnvironment environment;
+        private readonly VehicleManagmentDbContext dbContext;
+        private readonly IWebHostEnvironment environment;
         public ServicesController(VehicleManagmentDbContext _dbContext, IWebHostEnvironment _environment)
         {
             dbContext = _dbContext;
@@ -19,9 +19,8 @@ namespace Vehicle_Managment_System.Controllers
         // GET: ServicesController
         public ActionResult Index()
         {
-            var AllServices = dbContext.Services;
-           
-            return View(AllServices);
+            var allservices = dbContext.Services.ToList();
+            return View(allservices);
         }
 
         // GET: ServicesController/Details/5
@@ -43,17 +42,18 @@ namespace Vehicle_Managment_System.Controllers
         {
             if (ModelState.IsValid)
             {
-                string ImageName = model.Coverimage.FileName.ToString();
+                string ImageName = model.CoverImage.FileName.ToString();
                 var Folderpath = Path.Combine(environment.WebRootPath, "images");
                 var imagespath = Path.Combine(Folderpath, ImageName);
-                model.Coverimage.CopyTo(new FileStream(imagespath, FileMode.Create));
+                model.CoverImage.CopyTo(new FileStream(imagespath, FileMode.Create));
                 Services services = new Services();
+               
                 services.CoverImage = ImageName;
                 services.ServiceName = model.ServiceName;
                 services.Description = model.Description;
                 dbContext.Services.Add(services);
                 dbContext.SaveChanges();
-                return RedirectToAction("Create", "Services");
+                return RedirectToAction("Index", "Services");
             }
 
             return View();
