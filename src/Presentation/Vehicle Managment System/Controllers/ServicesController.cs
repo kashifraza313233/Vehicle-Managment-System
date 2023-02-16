@@ -27,10 +27,10 @@ namespace Vehicle_Managment_System.Controllers
                 allservices.Add(new AddServicesModel()
                 {
                     SId = service.SId,
-                  //  CoverImage = Convert.ToBase64String(),
+                    //CoverImage =  service.CoverImage,
                     ServiceName = service.ServiceName,
                     Description = service.Description,
-                 
+
                 });
             }
             return View(allservices);
