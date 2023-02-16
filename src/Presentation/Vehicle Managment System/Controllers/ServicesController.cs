@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using VM.Bussiness.Models;
 using VM.Data;
+using VM.Data.Migrations;
 using VM.Data.Models;
 
 namespace Vehicle_Managment_System.Controllers
@@ -19,7 +20,19 @@ namespace Vehicle_Managment_System.Controllers
         // GET: ServicesController
         public ActionResult Index()
         {
-            var allservices = dbContext.Services.ToList();
+            var allservices = new List<AddServicesModel>();
+            var ser = dbContext.Services.ToList();
+            foreach (var service in ser)
+            {
+                allservices.Add(new AddServicesModel()
+                {
+                    SId = service.SId,
+                  //  CoverImage = Convert.ToBase64String(),
+                    ServiceName = service.ServiceName,
+                    Description = service.Description,
+                 
+                });
+            }
             return View(allservices);
         }
 
@@ -44,14 +57,21 @@ namespace Vehicle_Managment_System.Controllers
             {
                 string ImageName = model.CoverImage.FileName.ToString();
                 var Folderpath = Path.Combine(environment.WebRootPath, "images");
+                
                 var imagespath = Path.Combine(Folderpath, ImageName);
                 model.CoverImage.CopyTo(new FileStream(imagespath, FileMode.Create));
-                Services services = new Services();
-               
-                services.CoverImage = ImageName;
-                services.ServiceName = model.ServiceName;
-                services.Description = model.Description;
-                dbContext.Services.Add(services);
+                //Services services = new Services();
+                dbContext.Add(new VM.Data.Models.Services()
+                {
+                    SId = model.SId,
+                    CoverImage = model.CoverImage.FileName,
+                    ServiceName = model.ServiceName,
+                    Description = model.Description,
+                });
+                //services.CoverImage = ImageName;
+                //services.ServiceName = model.ServiceName;
+                //services.Description = model.Description;
+                //dbContext.Services.Add(services);
                 dbContext.SaveChanges();
                 return RedirectToAction("Index", "Services");
             }
