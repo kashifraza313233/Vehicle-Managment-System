@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
+using System.Data.Common;
 using VM.Bussiness.Models;
 using VM.Data;
 using VM.Data.Migrations;
@@ -17,7 +17,7 @@ namespace Vehicle_Managment_System.Controllers
             dbContext = _dbContext;
             environment = _environment;
         }
-        // GET: ServicesController
+        // GET: ServicesController-------- 
         public ActionResult Index()
         {
             var allservices = new List<AddServicesModel>();
@@ -27,7 +27,7 @@ namespace Vehicle_Managment_System.Controllers
                 allservices.Add(new AddServicesModel()
                 {
                     SId = service.SId,
-                    //CoverImage =  service.CoverImage,
+                    ImagePath = service.CoverImage,
                     ServiceName = service.ServiceName,
                     Description = service.Description,
 
@@ -35,6 +35,11 @@ namespace Vehicle_Managment_System.Controllers
             }
             return View(allservices);
         }
+
+        //private IFormFile String(string coverImage)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         // GET: ServicesController/Details/5
         public ActionResult Details(int id)
@@ -51,20 +56,26 @@ namespace Vehicle_Managment_System.Controllers
         // POST: ServicesController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(AddServicesModel model )
+        public async Task<ActionResult> Create(AddServicesModel model )
         {
             if (ModelState.IsValid)
             {
-                string ImageName = model.CoverImage.FileName.ToString();
-                var Folderpath = Path.Combine(environment.WebRootPath, "images");
-                
-                var imagespath = Path.Combine(Folderpath, ImageName);
-                model.CoverImage.CopyTo(new FileStream(imagespath, FileMode.Create));
+                string ImageName = Path.GetFileName(model.CoverImage.FileName);
+                // model.CoverImage.FileName.ToString();
+                var Folderpath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot/images", ImageName);
+                //Path.Combine(environment.WebRootPath, "images");
+                using (var filestream=new FileStream(Folderpath, FileMode.Create))
+                {
+                   await model.CoverImage.CopyToAsync(filestream);
+                }
+                var imagespath = @"~/images/" + ImageName;
+                   // Path.Combine(Folderpath, ImageName);
+               // model.CoverImage.CopyTo(new FileStream(imagespath, FileMode.Create));
                 //Services services = new Services();
                 dbContext.Add(new VM.Data.Models.Services()
                 {
                     SId = model.SId,
-                    CoverImage = model.CoverImage.FileName,
+                    CoverImage = imagespath,
                     ServiceName = model.ServiceName,
                     Description = model.Description,
                 });
@@ -80,30 +91,39 @@ namespace Vehicle_Managment_System.Controllers
         }
 
         // GET: ServicesController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return View();
+           // var servicesinformation = dbContext.Services.Where(x=>x.SId== id).FirstOrDefault();
+            return View(/*servicesinformation*/);
         }
 
         // POST: ServicesController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(AddServicesModel model)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            //dbContext.Add(new VM.Data.Models.Services
+            //{
+            //    SId = model.SId,
+            //    CoverImage = model.ImagePath,
+            //    ServiceName = model.ServiceName,
+            //    Description = model.Description,
+            //});
+
+            return View();
         }
 
         // GET: ServicesController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var allservices = dbContext.Services.Find(id);
+            if (allservices != null)
+            {
+                dbContext.Remove(allservices);
+                dbContext.SaveChanges();
+            }
+            return RedirectToAction("Index", "Services");
+            //return View();
         }
 
         // POST: ServicesController/Delete/5
