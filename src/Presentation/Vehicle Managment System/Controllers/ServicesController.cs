@@ -93,8 +93,10 @@ namespace Vehicle_Managment_System.Controllers
         // GET: ServicesController/Edit/5
         public ActionResult Edit(int? id)
         {
-           // var servicesinformation = dbContext.Services.Where(x=>x.SId== id).FirstOrDefault();
-            return View(/*servicesinformation*/);
+            // var servicesinformation = dbContext.Services.Where(x=>x.SId== id).FirstOrDefault();
+            var allservices = dbContext.Services.Find(id);
+
+            return View(allservices);
         }
 
         // POST: ServicesController/Edit/5
@@ -127,18 +129,18 @@ namespace Vehicle_Managment_System.Controllers
         }
 
         // POST: ServicesController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Delete(int id, IFormCollection collection)
+        //{
+        //    try
+        //    {
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
     }
 }
