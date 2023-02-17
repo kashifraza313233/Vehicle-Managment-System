@@ -35,12 +35,6 @@ namespace Vehicle_Managment_System.Controllers
             }
             return View(allservices);
         }
-
-        //private IFormFile String(string coverImage)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
         // GET: ServicesController/Details/5
         public ActionResult Details(int id)
         {
@@ -94,28 +88,36 @@ namespace Vehicle_Managment_System.Controllers
         public ActionResult Edit(int? id)
         {
             // var servicesinformation = dbContext.Services.Where(x=>x.SId== id).FirstOrDefault();
-            var allservices = dbContext.Services.Find(id);
 
-            return View(allservices);
+            return View();
+           
         }
 
         // POST: ServicesController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(AddServicesModel model)
+        public async Task<ActionResult> Edit(AddServicesModel model)
         {
-            //dbContext.Add(new VM.Data.Models.Services
-            //{
-            //    SId = model.SId,
-            //    CoverImage = model.ImagePath,
-            //    ServiceName = model.ServiceName,
-            //    Description = model.Description,
-            //});
-
-            return View();
+            string ImageName = Path.GetFileName(model.CoverImage.FileName);
+          
+            var Folderpath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot/images", ImageName);
+     
+            using (var filestream = new FileStream(Folderpath, FileMode.Create))
+            {
+                await model.CoverImage.CopyToAsync(filestream);
+            }
+            var imagespath = @"~/images/" + ImageName;
+            dbContext.Add(new VM.Data.Models.Services()
+            {
+                SId = model.SId,
+                CoverImage = imagespath,
+                ServiceName = model.ServiceName,
+                Description = model.Description,
+            });
+            dbContext.SaveChanges();
+            return RedirectToAction("Index", "Services");
         }
-
-        // GET: ServicesController/Delete/5
+        
         public ActionResult Delete(int id)
         {
             var allservices = dbContext.Services.Find(id);

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<VM.Bussiness.Models.AddServicesModel>
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -6,3 +7,32 @@
     <h1 class="display-4">Vehicle Serving</h1>
     @*<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>*@
 </div>
+
+    <h5 class="display-4" style="font:bold">All Services</h5>
+
+<table class="table table-responsive table-success">
+    <tbody>
+        
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@Url.Content(item.ImagePath)" height="200" width="250">
+                </td>
+                <td>
+                    <h3 class="card-title">
+                            @Html.DisplayFor(modelItem => item.ServiceName)
+                    </h3>
+                    <p class="card-text" >
+                            @Html.DisplayFor(modelItem => item.Description)
+                    </p>
+                </td>
+            </tr>
+        }
+
+
+    </tbody>
+</table>
+    
+   
+ 
