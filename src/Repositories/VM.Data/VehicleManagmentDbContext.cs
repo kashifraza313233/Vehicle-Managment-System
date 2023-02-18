@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using VM.Data.Models;
 
 namespace VM.Data
 {
-    public class VehicleManagmentDbContext:DbContext
+    public class VehicleManagmentDbContext:IdentityDbContext
     {
         public VehicleManagmentDbContext(DbContextOptions<VehicleManagmentDbContext>options) : base(options)
         { 
