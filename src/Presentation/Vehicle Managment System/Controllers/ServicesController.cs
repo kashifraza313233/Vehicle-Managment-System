@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Data.Common;
 using VM.Bussiness.Models;
 using VM.Data;
@@ -55,17 +56,22 @@ namespace Vehicle_Managment_System.Controllers
             if (ModelState.IsValid)
             {
                 string ImageName = Path.GetFileName(model.CoverImage.FileName);
-                // model.CoverImage.FileName.ToString();
+               
                 var Folderpath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot/images", ImageName);
+                // model.CoverImage.FileName.ToString();
                 //Path.Combine(environment.WebRootPath, "images");
                 using (var filestream=new FileStream(Folderpath, FileMode.Create))
                 {
                    await model.CoverImage.CopyToAsync(filestream);
                 }
                 var imagespath = @"~/images/" + ImageName;
-                   // Path.Combine(Folderpath, ImageName);
-               // model.CoverImage.CopyTo(new FileStream(imagespath, FileMode.Create));
+                // Path.Combine(Folderpath, ImageName);
+                // model.CoverImage.CopyTo(new FileStream(imagespath, FileMode.Create));
                 //Services services = new Services();
+                //services.CoverImage = ImageName;
+                //services.ServiceName = model.ServiceName;
+                //services.Description = model.Description;
+                //dbContext.Services.Add(services);
                 dbContext.Add(new VM.Data.Models.Services()
                 {
                     SId = model.SId,
@@ -73,10 +79,7 @@ namespace Vehicle_Managment_System.Controllers
                     ServiceName = model.ServiceName,
                     Description = model.Description,
                 });
-                //services.CoverImage = ImageName;
-                //services.ServiceName = model.ServiceName;
-                //services.Description = model.Description;
-                //dbContext.Services.Add(services);
+                
                 dbContext.SaveChanges();
                 return RedirectToAction("Index", "Services");
             }
@@ -85,37 +88,26 @@ namespace Vehicle_Managment_System.Controllers
         }
 
         // GET: ServicesController/Edit/5
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Edit(int? id)
         {
-            // var servicesinformation = dbContext.Services.Where(x=>x.SId== id).FirstOrDefault();
+            var allservices = await dbContext.Services.FindAsync(id);
 
-            return View();
-           
+            return View(new AddServicesModel()
+            {
+                SId = allservices.SId,
+                ImagePath = allservices.CoverImage,
+                ServiceName = allservices.ServiceName,
+                Description = allservices.Description,
+            });
         }
 
         // POST: ServicesController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(AddServicesModel model)
+        public ActionResult Edit()
         {
-            string ImageName = Path.GetFileName(model.CoverImage.FileName);
-          
-            var Folderpath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot/images", ImageName);
-     
-            using (var filestream = new FileStream(Folderpath, FileMode.Create))
-            {
-                await model.CoverImage.CopyToAsync(filestream);
-            }
-            var imagespath = @"~/images/" + ImageName;
-            dbContext.Add(new VM.Data.Models.Services()
-            {
-                SId = model.SId,
-                CoverImage = imagespath,
-                ServiceName = model.ServiceName,
-                Description = model.Description,
-            });
-            dbContext.SaveChanges();
-            return RedirectToAction("Index", "Services");
+
+            return View();
         }
         
         public ActionResult Delete(int id)
