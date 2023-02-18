@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.DotNet.Scaffolding.Shared.Project;
 using Microsoft.EntityFrameworkCore;
 using System.Data.Common;
 using VM.Bussiness.Models;
@@ -104,10 +105,30 @@ namespace Vehicle_Managment_System.Controllers
         // POST: ServicesController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit()
+        public async Task<ActionResult> Edit(Services model, IFormFile photo)
         {
-
-            return View();
+            if (photo == null || photo.Length == 0)
+            {
+                return Content("File not Selected");
+            }
+            //Save the file in folder
+            var path = Path.Combine(environment.WebRootPath, @"wwwroot/images", photo.FileName);
+            using (FileStream stream = new FileStream(path,FileMode.Create))
+            {
+                await photo.CopyToAsync(stream);
+                stream.Close();
+            }
+            model.CoverImage = photo.FileName;
+            var ser = dbContext.Services.Where(x => x.SId == model.SId).FirstOrDefault();
+            if (ser != null) 
+            {
+                model.CoverImage = ser.CoverImage;
+                model.ServiceName = ser.ServiceName;
+                model.Description = ser.Description;
+                await dbContext.SaveChangesAsync();  
+            }
+            return RedirectToAction("Index", "Services");
+            
         }
         
         public ActionResult Delete(int id)

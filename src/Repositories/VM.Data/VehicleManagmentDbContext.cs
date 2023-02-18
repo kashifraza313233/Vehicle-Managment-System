@@ -11,6 +11,7 @@ namespace VM.Data
         }
         public DbSet<VehicleInfo> VehicleInfomations { get; set; }
         public DbSet<Services> Services { get; set; }
+        public DbSet<User> Users { get; set; }
         
     }
 }
